@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   return (
-    <h1>Hello</h1>)sdad
+    <h1>Hello</h1>)
 
 }
 
