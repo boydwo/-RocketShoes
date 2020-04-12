@@ -1,6 +1,6 @@
 import React from 'react';
 import { MdRemoveCircleOutline, MdAddCircleOutline, MdDelete } from 'react-icons/md';
-import { Container, ProductTable, Total } from './styles'
+import { Container, ProductTable, Total } from './styles';
 
 export default function Cart() {
   return (
@@ -12,7 +12,7 @@ export default function Cart() {
             <th>PRODUTO</th>
             <th>QUANTIDADE</th>
             <th>SUBTOTAL</th>
-            <th></th>
+            <th />
           </tr>
         </thead>
         <tbody>
