@@ -1,0 +1,9 @@
+{
+  "eslint.format.enable": true,
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    "vue"
+  ]
+}

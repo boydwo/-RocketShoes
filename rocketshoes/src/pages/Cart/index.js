@@ -1,6 +1,6 @@
 import React from 'react';
 import { MdRemoveCircleOutline, MdAddCircleOutline, MdDelete } from 'react-icons/md';
-import { Container, ProductTable, Total } from './styles';
+import { Container, ProductTable, Total } from './styles'
 
 export default function Cart() {
   return (
@@ -25,13 +25,15 @@ export default function Cart() {
               <span>R$129,90</span>
             </td>
             <td>
-              <button type="button">
-                <MdRemoveCircleOutline size={20} color="#7159c1" />
-              </button>
-              <input type="number" readOnly value={1} />
-              <button type="button">
-                <MdAddCircleOutline size={20} color="#7159c1" />
-              </button>
+              <div>
+                <button type="button">
+                  <MdRemoveCircleOutline size={20} color="#7159c1" />
+                </button>
+                <input type="number" readOnly value={1} />
+                <button type="button">
+                  <MdAddCircleOutline size={20} color="#7159c1" />
+                </button>
+              </div>
             </td>
             <td>
               <strong>R$258,80</strong>
