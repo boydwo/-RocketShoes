@@ -2,9 +2,10 @@ import { call, select, put, all, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import api from '../../../services/api';
+import history from '../../../services/history';
 import { formatPrice } from '../../../util/format';
 
-import { addToCartSuccess, updateAmount } from './actions';
+import { addToCartSuccess, updateAmountSuccess } from './actions';
 
 // (*) função generator mais forte que wait
 function* addToCart({ id }) {
@@ -29,7 +30,7 @@ function* addToCart({ id }) {
 
   if (productExists) {
     // put para chamar outra action
-    yield put(updateAmount(id, amount));
+    yield put(updateAmountSuccess(id, amount));
   } else {
     // call para fazer uma chama a api
     const response = yield call(api.get, `/products/${id}`);
@@ -39,8 +40,25 @@ function* addToCart({ id }) {
       priceFormatted: formatPrice(response.data.price),
     };
     yield put(addToCartSuccess(data));
+    history.push('/cart');
   }
 }
 
+function* updateAmount({ id, amount }) {
+  if (amount <= 0) return;
+
+  const stock = yield call(api.get, `stock/${id}`);
+  const stockAmount = stock.data.amount;
+
+  if (amount > stockAmount) {
+    toast.error('Produto fora de estoque');
+    return;
+  }
+  yield put(updateAmountSuccess(id, amount));
+}
+
 // takeLatest ouve as actions mas pega apenas a ultima chamada em curto espaço de tempo
-export default all([takeLatest('@cart/ADD_REQUEST', addToCart)]);
+export default all([
+  takeLatest('@cart/ADD_REQUEST', addToCart),
+  takeLatest('@cart/UPDATE_AMOUNT_REQUEST', updateAmount),
+]);

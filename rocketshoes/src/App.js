@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
@@ -9,18 +9,20 @@ import GlobalStyles from './styles/global';
 import Header from './components/Header/index';
 import Routes from './routes';
 
+import history from './services/history';
 import store from './store';
 
 function App() {
   return (
     <div>
       <Provider store={store}>
-        <BrowserRouter>
+        {/* // router-dom ta ouvindo as informaçoes no history qual alteraçao ele pega */}
+        <Router history={history}>
           <Header />
           <Routes />
           <GlobalStyles />
           <ToastContainer autoClose={3000} />
-        </BrowserRouter>
+        </Router>
       </Provider>
     </div>
   );
